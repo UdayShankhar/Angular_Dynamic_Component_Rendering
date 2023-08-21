@@ -1,0 +1,25 @@
+<table mat-table [dataSource]="tableData">
+  <!-- Id Column -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> ID </th>
+    <td mat-cell *matCellDef="let element"> {{ element.id }} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Name </th>
+    <td mat-cell *matCellDef="let element"> {{ element.name }} </td>
+  </ng-container>
+
+  <!-- Matched Data Column -->
+  <ng-container matColumnDef="matchedData">
+    <td mat-cell *matCellDef="let row" [attr.colspan]="displayMatchedData(row) ? 2 : 0">
+      <div *ngIf="displayMatchedData(row)">
+        Matched Data: {{ matchedDataMap.get(row.id)?.name }}
+      </div>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="['id', 'name']"></tr>
+  <tr mat-row *matRowDef="let row; columns: ['id', 'name', 'matchedData']"></tr>
+</table>
